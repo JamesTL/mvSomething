@@ -15,9 +15,13 @@ function EmailFormView(){
     //
     this.button.setAttribute('type', 'submit');
     this.button.innerHTML('Add');
-};
-
-
+}
+/*
+ *
+ *
+ *
+ *
+ */
 EmailFormView.prototype.render = function(){
     'use strict';
      //create form from tge declared elements
@@ -28,7 +32,12 @@ EmailFormView.prototype.render = function(){
     //call to bindEvnts
     this.bindEvents();
 };
-
+/*
+ *
+ *
+ *
+ *
+ */
 EmailFormView.prototype.bindEvents = function(){
     'use strict';
     //cache this for use inside the event handlers
@@ -49,14 +58,24 @@ EmailFormView.prototype.bindEvents = function(){
     });
 
 };
-
+/*
+ *
+ *
+ *
+ *
+ */
 EmailFormView.prototype.clearField = function(){
     'use strict';
      this.input.value = '';
 };
 
+/*
+ *
+ *
+ *
+ *
+ */
 //CREATE A VIEW  FOR A LIST OF ALL EMAILS - WITH A REMOVE LINK ADJACENT TO EACH EMAIL ADDRESS
-
 function EmailListView (){
     'use strict';
     this.list= document.createElement('ul');
@@ -64,7 +83,12 @@ function EmailListView (){
     this.listItemText = document.createElement('span');
     this.listItemRemoveButton = document.createElement('button');
 }
-
+/*
+ *
+ *
+ *
+ *
+ */
 EmailListView.prototype.render = function(modelData){
     'use strict';
     var index = 0,
@@ -82,7 +106,12 @@ EmailListView.prototype.render = function(modelData){
     this.bindEvents();
 
 };
-
+/*
+ *
+ *
+ *
+ *
+ */
 EmailListView.prototype.createListItem = function(email) {
     'use strict';
     //clone existing elements first, as this is more efficient than creating new ones each time
@@ -96,7 +125,12 @@ EmailListView.prototype.createListItem = function(email) {
 
 
 };
-
+/*
+ *
+ *
+ *
+ *
+ */
 EmailListView.prototype.bindEvents =  function(){
     'use strict';
     var that = this;
@@ -122,7 +156,12 @@ EmailListView.prototype.bindEvents =  function(){
         that.removeEmail(email);
     });
 };
-
+/*
+ *
+ *
+ *
+ *
+ */
 EmailListView.prototype.removeEmail = function(mail){
     'use strict';
     var listItems = this.list.getElementsByTagName("li"),
@@ -140,27 +179,33 @@ EmailListView.prototype.removeEmail = function(mail){
         }
     }
 };
-
-
-// Define a generic View which can contain child Views. When its render() method is called, it
-// calls the render() methods of its child Views in turn, passing along any Model data
-// provided upon instantiation
+/*
+ *
+ *
+ *
+ *
+ */
+// Define a generic View which can contain child Views. When its render() method is called, it calls the render() methods of its child Views in turn, passing along any Model data provided upon instantiation
 function EmailView(views) {
+    'use strict';
     this.views = views || [];
 }
+/*
+ *
+ *
+ *
+ *
+ */
+EmailView.prototype.render = function(modelData){
 
-EmailView.prototype = {
+    'use strict';
+    var index = 0,
+        length = this.views.length;
 
-    // All Views need to have a render() method - in the case of this generic View, it simply
-    // executes the render() method of each of its child Views
-    render: function(modelData) {
-        var index = 0,
-            length = this.views.length;
-
-        // Loop through the child views, executing their render() methods, passing along any
-        // Model data provided upon instantiation
-        for (; index < length; index++) {
-            this.views[index].render(modelData);
-        }
+    // Loop through the child views, executing their render() methods, passing along any
+    // Model data provided upon instantiation
+    for (; index < length; index++) {
+        this.views[index].render(modelData);
     }
 };
+

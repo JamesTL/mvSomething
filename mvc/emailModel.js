@@ -1,49 +1,59 @@
 
 //constructor with prototype
-function EmailModel(){
+function EmailModel(data){
   'use strict';
   //create a storage array for the email addresses
   this.emailAdresses = data || [];
 }
+/*
+ *
+ *
+ *
+ *
+ */
+EmailModel.prototype.add = function(email) {
+    'use strict';
+    this.emailAdresses.unshift(email);
 
+    //create broadcast event indicating that a new email address has been added and pass the new email address to all objects
+    //listening for the   event
 
-EmailModel.prototype = {
+    observer.publish('model.email-address.added', email);
+};
+/*
+ *
+ *
+ *
+ *
+ */
+EmailModel.prototype.remove = function() {
+    'use strict';
+    var index = 0,
+        length = this.emailAddresses.length;
 
-    // add a new email address to the emailAddresses array
-    add:function(email){
-        'use strict';
-        this.emailAdresses.unshift(email);
+    for (; index < length; index++) {
 
-        //create broad event indicating that a new email address has been added and pass the new email address to all objects
-        //listening for an add  event
+        if (this.emailAddresses[index] === email) {
 
-        observer.publish('model.email-address.added', email)
+            this.emailAdresses.splice(index, 1);
 
-    },
-    //allow removal of an email from the emailAddresses array
-    remove: function(email){
-        'use strict';
-        var index= 0,
-            length = this.emailAddresses.length;
+            // broadcast deletion event and pass across the email address that was delted to object listening for a remove event
 
-        for (;index < length ; index++){
+            observer.publish('model.email-address.remove', email)
 
-             if(this.emailAddresses[index] === email){
-
-                 this.emailAdresses.splice(index,1);
-
-                 // broadcast deletion event and pass across the email address that was delted to object listening for a remove event
-
-                 observer.publish('model.email-address.remove', email)
-
-                 break;
-
-             }
-        }
-    },
-    //return the complete list of  all emails i.e. return the emailAddresses array
-    getAll:function(){
-        'use strict';
-        return this.emailAdresses;
+            break;
+         }
     }
 };
+/*
+ *
+ *
+ *
+ *
+ */
+EmailModel.prototype.getAll = function() {
+    'use strict';
+    return this.emailAdresses;
+
+};
+

@@ -6,21 +6,31 @@ function EmailController(model,view){
     this.model = model;
     this.view = view;
 }
-
+/*
+ *
+ *
+ *
+ *
+ */
 EmailController.prototype.initalise = function(){
-      'use strict';
+     'use strict';
 
     var modelData = this.model.getAll();
     this.view.render(modelData);
     this.bindEvents();
 };
-
+/*
+ *
+ *
+ *
+ *
+ */
 EmailController.prototype.bindEvents = function(){
 
    'use strict';
     var that = this;
 
-    //view indicates that a new email address has been added via the user - call teh  add email method
+    //view indicates that a new email address has been added via the user - call the  add email method
 
     observer.subscribe('view.email-view.add',function(email){
 
@@ -32,18 +42,23 @@ EmailController.prototype.bindEvents = function(){
 
          that.removeEmail(email);
     });
-
 };
-
-
+/*
+ *
+ *
+ *
+ *
+ */
 EmailController.prototype.addEmail = function(email){
     'use strict';
     this.model.add(email);
-
-
-
 };
-
+/*
+ *
+ *
+ *
+ *
+ */
 EmailController.prototype.removeEmail = function(email){
     'use strict';
     this.model.remove(email);
