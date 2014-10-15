@@ -1,10 +1,11 @@
 /**
  * Created by jameslove on 13/10/2014.
  */
-function EmailController(model,view){
+function EmailController(model,view,observer){
     'use strict';
     this.model = model;
     this.view = view;
+    this.observer = observer;
 }
 /*
  *
@@ -32,13 +33,13 @@ EmailController.prototype.bindEvents = function(){
 
     //view indicates that a new email address has been added via the user - call the  add email method
 
-    observer.subscribe('view.email-view.add',function(email){
+    this.observer.subscribe('view.email-view.add',function(email){
 
-        that.addEmail(email);
+       that.addEmail(email);
     });
     //when the view indicates that anemail address has been removed via the user -  call the remove email method
 
-    observer.subscribe('view.email-view.remove',function(email){
+    this.observer.subscribe('view.email-view.remove',function(email){
 
          that.removeEmail(email);
     });
